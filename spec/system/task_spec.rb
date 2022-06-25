@@ -10,16 +10,13 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
         # テストで使用するためのタスクを作成
-        byebug
         task = FactoryBot.create(:user, name: 'name_test')
-        byebug
         # タスク一覧ページに遷移
         visit users_path
-        byebug
         # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
         # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
         expect(page).to have_content 'name'
-        byebug
+
         # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
     end
