@@ -1,5 +1,17 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
+  background do
+    FactoryBot.create(:user, name: '付け加えた名前１')
+    FactoryBot.create(:user, name: '付け加えた名前２')
+    FactoryBot.create(:second_user, name: '付け加えた名前３')
+  end
+
+  before do
+    # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
+    FactoryBot.create(:user)
+    FactoryBot.create(:second_user)
+  end
+  
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
