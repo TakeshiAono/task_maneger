@@ -3,16 +3,7 @@ describe 'タスクモデル機能', type: :model do
   describe 'バリデーションのテスト' do
     context 'タスクのタイトルが空の場合' do
       it 'バリデーションにひっかる' do
-        User.create(id: 1, name: "test")
-        task = Task.create(user_id: 1, title: "")
-        # user = user.save(name: "a", tasks_attributes: [title: "a"])
-        byebug
-        # user.create(name: 'a',title:"a")
-
-        # task = user.tasks.save
-        # task.save
-        byebug
-
+        task = User.create(name: "test", tasks_attributes: [{title: ""}])
         expect(task).not_to be_valid
       end
     end
