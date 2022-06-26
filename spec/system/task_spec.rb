@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  background do
+  before do
     FactoryBot.create(:user, name: '付け加えた名前１')
     FactoryBot.create(:user, name: '付け加えた名前２')
     FactoryBot.create(:second_user, name: '付け加えた名前３')
