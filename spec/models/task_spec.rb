@@ -17,7 +17,8 @@ describe 'タスクモデル機能', type: :model do
     end
     context 'タスクのタイトルと詳細に内容が記載されている場合' do
       it 'バリデーションが通る' do
-        # ここに内容を記載する
+        task = User.create(name: "test", tasks_attributes: [{title: "test", priority: 1, deadline: Date.today}])
+        expect(task).to be_valid
       end
     end
   end
