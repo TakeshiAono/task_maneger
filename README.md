@@ -6,18 +6,17 @@
     section:string
 
 - tasks
-    user_id:integer
+    user_id:bigint
     priority:integer
     name:string
     deadline:date
 
 - groups
-    task_id:integer
-    label_id:integer
+    task_id:bigint
+    label_id:bigint
 
 - statuses
-    task_id:integer
-    label_id:integer
+    task_id:bigint
     name:string
 
 - labels
