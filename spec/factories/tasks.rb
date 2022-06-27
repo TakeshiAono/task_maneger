@@ -5,7 +5,7 @@ FactoryBot.define do
   end
   factory :task do
     title {'aono title'}
-    user_id {1}
+    id {1}
     
   end
 end
