@@ -1,3 +1,4 @@
+# ER図構成
 #### Users
 | Columns | Description |
 | --- | --- |
@@ -31,3 +32,15 @@
 | Columns | Description |
 | --- | --- |
 |name|string|
+
+
+
+# heroku デプロイ手順
+1. herokuへログイン
+   - heroku login -i
+2. herokuにアプリを作成
+    - heroku create 
+3. ローカルブランチstep2 をherokuにプッシュする
+    - git push heroku step2:master
+4. herokuにアプリ用のテーブルを作成
+      - heroku run rails db:migrate
