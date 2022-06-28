@@ -19,6 +19,11 @@ class TasksController < ApplicationController
   def edit
   end
 
+  def sort
+    @tasks = Task.all.order(deadline: "DESC")
+    render :index
+  end
+
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
