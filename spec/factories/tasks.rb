@@ -4,8 +4,9 @@ FactoryBot.define do
     id {1}
   end
   factory :task do
-    title {'aono title'}
-    id {1}
-    
+    title {'aono_title'}
+    priority {1}
+    deadline {Date.today}
+    created_at {Date.today}
   end
 end
