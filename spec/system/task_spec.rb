@@ -6,16 +6,8 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
   
   describe '新規作成機能' do
-    context 'タスクを新規作成した場合' do
-      it '作成したタスクが表示される' do
-        new_task = FactoryBot.create(:task, title:"test_title", priority: 1, deadline: "2022-01-01")
-        visit task_path(new_task.id)
-        expect(page).to have_content "test_title"
-        expect(page).to have_content "2022-01-01"
-      end
-    end
-    context 'タスクを新規新規登録する場合' do
-      example 'ステータスが登録できる' do
+    context 'タスクを新規新作成した場合' do
+      example '作成したタスクが表示される' do
         visit new_task_path
         fill_in "Title", with:"started"
         fill_in "Priority", with: 1
