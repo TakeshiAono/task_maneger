@@ -3,7 +3,11 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC")
+    unless  params[:sort_expired]
+      @tasks = Task.all.order(created_at: "DESC")
+    else
+      @tasks = Task.all.order(deadline: "DESC")
+    end
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -17,11 +21,6 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-  end
-
-  def sort
-    @tasks = Task.all.order(deadline: "DESC")
-    render :index
   end
 
   # POST /tasks or /tasks.json

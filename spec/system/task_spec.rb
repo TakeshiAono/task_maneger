@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  let!(:task) { FactoryBot.create(:task)}
+  # let!(:task) { FactoryBot.create(:task)}
   # before do
   #   FactoryBot.create(:user, name: '付け加えた名前１')
   #   FactoryBot.create(:user, name: '付け加えた名前２')
@@ -16,15 +16,33 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
-        # FactoryBot.create(:user, name:"test")
-        new_task = FactoryBot.create(:task, title:"test_title", priority: 1, deadline: Date.today)
+        new_task = FactoryBot.create(:task, title:"test_title", priority: 1, deadline: "2022-01-01")
         visit task_path(new_task.id)
         expect(page).to have_content "test_title"
+        expect(page).to have_content "2022-01-01"
+      end
+    end
+    context 'タスクを新規新規登録する場合' do
+      example '終了期限も登録できる' do
+        # visit new_task_path
+        # expect().to 
+
+
       end
     end
   end
 
   describe '一覧表示機能' do
+    context '終了期限でソートした場合' do
+      example '終了期限で降順に一覧が表示される' do
+        FactoryBot.create(:task, id: 1, deadline: "2022-01-01")
+        FactoryBot.create(:task, id: 2, deadline: "2022-01-02")
+        visit tasks_path
+        click_on 'Deadline'
+        task_list = all('.task_row')
+        expect(task_list[2].text).to be >= task_list[6].text
+      end
+    end
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
         # テストで使用するためのタスクを作成
