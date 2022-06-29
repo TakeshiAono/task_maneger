@@ -16,11 +16,14 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクを新規新規登録する場合' do
       example 'ステータスが登録できる' do
-        task = FactoryBot.create(:task)
-        FactoryBot.create(:status, task: task)
         visit new_task_path
-        fill_in 
-        
+        fill_in "Title", with:"started"
+        fill_in "Priority", with: 1
+        select "done", from:"task[status]"
+        click_on "commit"
+        expect(page).to have_content 1
+        expect(page).to have_content "done"
+        expect(page).to have_content 'started'
       end
     end
   end
@@ -34,10 +37,8 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_on 'Deadline'
         task_list = all('.task_row')
         # expect(task_list[0].title).to be >= task_list[1].text
-        byebug
         expect(task_list[0]).to have_content '2022-01-02'
         expect(task_list[1]).to have_content '2022-01-01'
-        byebug
       end
     end
     context '一覧画面に遷移した場合' do

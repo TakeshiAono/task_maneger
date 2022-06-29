@@ -18,17 +18,17 @@
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, name: "Title" %>
   </div>
 
   <div class="field">
     <%= form.label :priority %>
-    <%= form.number_field :priority %>
+    <%= form.number_field :priority, name: "Priority" %>
   </div>
 
   <div class="field">
     <%= form.label :deadline %>
-    <%= form.date_select :deadline %>
+    <%= form.date_select :deadline, name: "Deadline" %>
   </div>
   <div class="field">
     <%= form.label :status %>
