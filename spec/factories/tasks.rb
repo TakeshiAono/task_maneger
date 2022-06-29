@@ -3,10 +3,15 @@ FactoryBot.define do
     name {'aono'}
     id {1}
   end
+
   factory :task do
     title {'aono_title'}
     priority {1}
     deadline {Date.today}
     created_at {Date.today}
+  end
+
+  factory :status do
+    name {'yet'}
   end
 end

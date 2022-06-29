@@ -30,6 +30,10 @@
     <%= form.label :deadline %>
     <%= form.date_select :deadline %>
   </div>
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Task.status_input_restriction %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
