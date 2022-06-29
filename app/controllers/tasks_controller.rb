@@ -2,11 +2,12 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   # GET /tasks or /tasks.json
-  def index
-    unless  params[:sort_expired]
-      @tasks = Task.all.order(created_at: "DESC")
-    else
-      @tasks = Task.all.order(deadline: "DESC")
+  def index    
+    @tasks = Task.all.order(created_at: "DESC")
+    @tasks = Task.all.order(deadline: "DESC") if params[:sort_expired]
+    if params[:search]
+      @tasks = Task.where('title like ?',"%#{params[:search][:title_search]}%") if params[:search][:title_search].present?
+      @tasks = @tasks.where('status like ?',"#{params[:search][:status_search]}") if params[:search][:status_search].present?
     end
   end
 

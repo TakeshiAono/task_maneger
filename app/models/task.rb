@@ -7,6 +7,6 @@ class Task < ApplicationRecord
   # belongs_to :user
 
   def self.status_input_restriction
-    ['done','not_yet','started']
+    [nil, 'done','not_yet','started']
   end
 end
