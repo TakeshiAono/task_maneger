@@ -10,7 +10,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_on "commit"
         expect(all('.show_value')[0].text).to have_content "low"
         expect(all('.show_value')[1].text).to have_content 'test'
-        expect(all('.show_value')[2].text).to have_content "2022-06-30"
+        expect(all('.show_value')[2].text).to have_content Date.today
         expect(all('.show_value')[3].text).to have_content "done"
       end
     end
