@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  PRIORITY_CONST = {"1" => "low", "2" => "middle", "3" => "high"}
+  PRIORITY_WORD = ["low", "middle", "high"]
   validates :title, presence: true
   validates :priority, presence: true, numericality: {less_than_or_equal_to: 3}
   validates :deadline, presence: true
@@ -8,6 +10,10 @@ class Task < ApplicationRecord
 
   def self.status_input_restriction
     [nil, 'done','not_yet','started']
+  end
+
+  def self.priority_cord
+    PRIORITY_CONST
   end
 
   scope :search, -> (column, search_word){ where("#{column} like ?","%#{search_word}%") }

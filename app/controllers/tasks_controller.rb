@@ -28,7 +28,19 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    if task_params[:priority] == "low"
+      new_params = task_params
+      new_params["priority"] =1
+    elsif task_params[:priority] == "middle"
+      new_params = task_params
+      new_params["priority"] =2
+    elsif task_params[:priority] == "high"
+      new_params = task_params
+      new_params["priority"] =3
+    else
+      raise
+    end
+    @task = Task.new(new_params)
 
     respond_to do |format|
       if @task.save

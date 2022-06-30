@@ -28,7 +28,7 @@
       <tr class ="task_row">
         <%# <><%= task.user_id %>
         <td><%= task.title %></td>
-        <td><%= task.priority %></td>
+        <td><%= Task::priority_cord[task.priority] %></td>
         <td><%= task.deadline %></td>
         <td><%= task.status %></td>
         <td><%= task.created_at %></td>

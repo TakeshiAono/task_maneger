@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :priority %>
-    <%= form.number_field :priority %>
+    <%= form.select :priority, Task::PRIORITY_WORD %>
   </div>
 
   <div class="field">
