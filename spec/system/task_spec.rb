@@ -9,11 +9,11 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクを新規新作成した場合' do
       example '作成したタスクが表示される' do
         visit new_task_path
-        fill_in "task[priority]", with: 1
+        select "low", from:"task[priority]"
         fill_in "task[title]", with:"test"
         select "done", from:"task[status]"
         click_on "commit"
-        expect(all('.show_value')[0].text).to have_content 1
+        expect(all('.show_value')[0].text).to have_content "low"
         expect(all('.show_value')[1].text).to have_content 'test'
         expect(all('.show_value')[2].text).to have_content "2022-06-30"
         expect(all('.show_value')[3].text).to have_content "done"
