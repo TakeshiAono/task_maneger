@@ -1,10 +1,5 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  before do
-    # FactoryBot.create(:status, name: "not_yet")
-    # FactoryBot.create(:status, name: "done")
-  end
-  
   describe '新規作成機能' do
     context 'タスクを新規新作成した場合' do
       example '作成したタスクが表示される' do
@@ -22,6 +17,19 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
 
   describe '一覧表示機能' do
+    context '優先順位でソートした場合' do
+      example '正しい検索結果が表示される' do
+        FactoryBot.create(:task, id: 1, title: "test", priority: 1)
+        FactoryBot.create(:task, id: 2, title: "test2", priority: 2)
+        FactoryBot.create(:task, id: 3, title: "test3", priority: 3)
+        visit tasks_path
+        click_on 'Priority'
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content 'high'
+        expect(task_list[1]).to have_content 'middle'
+        expect(task_list[2]).to have_content 'low'
+      end
+    end
     context 'statusとtitleでand検索した場合' do
       example '正しい検索結果が表示される' do
         FactoryBot.create(:task, id: 1, title: "test", status: "done")
