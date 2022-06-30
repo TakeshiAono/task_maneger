@@ -22,6 +22,23 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
 
   describe '一覧表示機能' do
+    context 'statusとtitleでand検索した場合' do
+      example '正しい検索結果が表示される' do
+        FactoryBot.create(:task, id: 1, title: "test", status: "done")
+        FactoryBot.create(:task, id: 2, title: "I have a pen", status: "done")
+        FactoryBot.create(:task, id: 3, title: "test", status: "not_yet")
+        FactoryBot.create(:task, id: 4, title: "I have a pen", status:"not_yet")
+        visit tasks_path
+        fill_in "search[title_search]", with: "test"
+        select "done", from: "search[status_search]"
+        click_on 'search'
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content 'test'
+        expect(task_list[0]).to have_content 'done'
+        expect(task_list[1]).to have_content ''
+
+      end
+    end
     context 'statusで完全一致検索した場合' do
       example '正しい検索結果が表示される' do
         FactoryBot.create(:task, id: 1, title: "test", status: "done")
