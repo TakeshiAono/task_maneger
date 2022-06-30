@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
-  # GET /tasks or /tasks.json
   def index
     @tasks = Task.all.order(created_at: "DESC")
     @tasks = Task.all.order(priority: "DESC") if params[:sort_priority]
@@ -10,6 +9,7 @@ class TasksController < ApplicationController
       @tasks = Task.where('title like ?',"%#{params[:search][:title_search]}%") if params[:search][:title_search].present?
       @tasks = @tasks.where('status like ?',"#{params[:search][:status_search]}") if params[:search][:status_search].present?
     end
+    @tasks = @tasks.page(params[:page]).per(5)
   end
 
   # GET /tasks/1 or /tasks/1.json
