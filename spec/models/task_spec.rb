@@ -1,13 +1,20 @@
 require 'rails_helper'
 describe 'タスクモデル機能', type: :model do
   describe '検索機能' do
-    let!(:task){FactoryBot.create(:task, title: "test")}
-    let!(:second_task){FactoryBot.create(:second_task, title: 'sample')}
+    let!(:task){FactoryBot.create(:task, title: "test", status: "done")}
+    let!(:second_task){FactoryBot.create(:second_task, title: 'sample', status: "not_yet")}
     context 'scopメソッドでタイトルのあいまい検索をした場合' do
       it '検索キーワードを含むタスクが絞り込まれる' do
-        expect(Task.title_search("test")).to include(task)
-        expect(Task.title_search("test")).not_to include(second_task)
-        expect(Task.title_search("test").count).to eq 1
+        expect(Task.search("title", "test")).to include(task)
+        expect(Task.search("title", "test")).not_to include(second_task)
+        expect(Task.search("title", "test").count).to eq 1
+      end
+    end
+    context 'scopメソッドでstatusのあいまい検索をした場合' do
+      it '検索キーワードを含むsutatusが絞り込まれる' do
+        expect(Task.search("status", "done")).to include(task)
+        expect(Task.search("status", "done")).not_to include(second_task)
+        expect(Task.search("status", "done").count).to eq 1
       end
     end
   end

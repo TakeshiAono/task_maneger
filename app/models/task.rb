@@ -10,6 +10,9 @@ class Task < ApplicationRecord
     [nil, 'done','not_yet','started']
   end
 
-  scope :title_search, -> (search_word){ where('title like ?',"%#{search_word}%") }
+  scope :search, -> (column, search_word){ where("#{column} like ?","%#{search_word}%") }
+  # def self.title_search(search_word)
+  #   where('title like ?',"%#{search_word}%")
+  # end
   
 end
