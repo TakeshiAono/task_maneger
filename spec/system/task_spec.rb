@@ -36,7 +36,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[0]).to have_content 'test'
         expect(task_list[0]).to have_content 'done'
         expect(task_list[1]).to have_content ''
-
       end
     end
     context 'statusで完全一致検索した場合' do

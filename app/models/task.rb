@@ -9,4 +9,7 @@ class Task < ApplicationRecord
   def self.status_input_restriction
     [nil, 'done','not_yet','started']
   end
+
+  scope :title_search, -> (search_word){ where('title like ?',"%#{search_word}%") }
+  
 end

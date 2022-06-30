@@ -11,6 +11,13 @@ FactoryBot.define do
     created_at {Date.today}
   end
 
+  factory :second_task, class: Task do
+    title {'test2'}
+    priority {2}
+    deadline {Date.today}
+    created_at {Date.today}
+  end
+
   factory :status do
     name {'yet'}
   end
