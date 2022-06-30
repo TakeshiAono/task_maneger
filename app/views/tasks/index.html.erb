@@ -14,7 +14,7 @@
     <tr>
       <%# <th>User</th> %>
       <th>Title</th>
-      <th>Priority</th>
+      <th><%= link_to "Priority", tasks_path(sort_priority: "true") %></th>
       <%# <th><%= link_to "Deadline", sort_tasks_path %>
       <th><%= link_to "Deadline", tasks_path(sort_expired: "true") %></th>
       <th>Status</th>

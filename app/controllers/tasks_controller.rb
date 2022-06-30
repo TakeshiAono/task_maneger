@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all.order(created_at: "DESC")
+    @tasks = Task.all.order(priority: "DESC") if params[:sort_priority]
     @tasks = Task.all.order(deadline: "DESC") if params[:sort_expired]
     if params[:search]
       @tasks = Task.where('title like ?',"%#{params[:search][:title_search]}%") if params[:search][:title_search].present?

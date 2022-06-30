@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   validates :title, presence: true
-  validates :priority, presence: true
+  validates :priority, presence: true, numericality: {less_than_or_equal_to: 3}
   validates :deadline, presence: true
   # has_many :status
   # accepts_nested_attributes_for :status
