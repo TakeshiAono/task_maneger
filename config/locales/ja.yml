@@ -1,6 +1,8 @@
 ja:
   view:
-    sample: サンプル
+    index: 
+      sample: "サンプル"
+      priority: "優先順位"
   date:
     formats:
       default: "%Y/%m/%d"

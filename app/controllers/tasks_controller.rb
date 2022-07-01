@@ -30,13 +30,13 @@ class TasksController < ApplicationController
   def create
     if task_params[:priority] == "low"
       new_params = task_params
-      new_params["priority"] =1
+      new_params["priority"] = 1
     elsif task_params[:priority] == "middle"
       new_params = task_params
-      new_params["priority"] =2
+      new_params["priority"] = 2
     elsif task_params[:priority] == "high"
       new_params = task_params
-      new_params["priority"] =3
+      new_params["priority"] = 3
     else
       raise
     end

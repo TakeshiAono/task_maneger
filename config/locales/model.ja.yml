@@ -1,17 +1,17 @@
-ja:
+ja:  
+  Priority: "優先順位"
+  Deadline: "期限"  
   activerecord:
-    models:
-      blog: ブログ
-      user: ユーザー
     attributes:
-      blog:
+      task:
+        priority: 優先順位
+        deadline: 期限
+        status: 進行状況
+        low: 低
+        Create Task: 作成
         title: タイトル
-        content: 内容
-      user:
-        title: タイトル
-        name: 名前
-        email: メールアドレス
-        current_password: 現在のパスワード
-        password: パスワード
-        password_confirmation: 確認用パスワード
-        remember_me: ログインを記憶
+  views:
+    tasks:
+      Title: タイトル
+  # title: タイトル
+

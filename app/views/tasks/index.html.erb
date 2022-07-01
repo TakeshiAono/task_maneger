@@ -12,7 +12,6 @@
       <%= f.label :status_search %>
       <%= f.select :status_search, Task.status_input_restriction %>
     </div>
-
     <div><%= f.submit "search", class:"bd-highlight" %></div>
   <% end %>
 </div>
@@ -23,10 +22,10 @@
   <thead>
     <tr>
       <%# <th>User</th> %>
-      <th scope="col">Title</th>
-      <th scope="col"><%= link_to "Priority", tasks_path(sort_priority: "true") %></th>
+      <th scope="col"><%=  t("title") %></th>
+      <th scope="col"><%= link_to t("Priority"), tasks_path(sort_priority: "true") %></th>
       <%# <th><%= link_to "Deadline", sort_tasks_path %>
-      <th scope="col"><%= link_to "Deadline", tasks_path(sort_expired: "true") %></th>
+      <th scope="col"><%= link_to t("Deadline"), tasks_path(sort_expired: "true") %></th>
       <th scope="col">Status</th>
       <th scope="col">created_at</th>
       <th scope="col" colspan="3"></th>
@@ -49,8 +48,5 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-
 <%= paginate @tasks %>

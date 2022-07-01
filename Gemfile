@@ -13,6 +13,7 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
+gem 'rails-i18n'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
