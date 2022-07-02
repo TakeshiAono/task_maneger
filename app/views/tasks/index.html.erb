@@ -12,11 +12,11 @@
       <%= f.label :status_search %>
       <%= f.select :status_search, Task.status_input_restriction %>
     </div>
-    <div><%= f.submit "search", class:"bd-highlight" %></div>
+    <div><%= f.submit t("search"), class:"bd-highlight" %></div>
   <% end %>
 </div>
 
-<p><%= link_to 'New Task', new_task_path ,class:"btn btn-primary"%></p>
+<p><%= link_to t('New Task'), new_task_path ,class:"btn btn-primary"%></p>
 
 <table class="table">
   <thead>
@@ -26,8 +26,8 @@
       <th scope="col"><%= link_to t("Priority"), tasks_path(sort_priority: "true") %></th>
       <%# <th><%= link_to "Deadline", sort_tasks_path %>
       <th scope="col"><%= link_to t("Deadline"), tasks_path(sort_expired: "true") %></th>
-      <th scope="col">Status</th>
-      <th scope="col">created_at</th>
+      <th scope="col"><%= t("Status") %> </th>
+      <th scope="col"> <%= t("created_at") %></th>
       <th scope="col" colspan="3"></th>
     </tr>
   </thead>

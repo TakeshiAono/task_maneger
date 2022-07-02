@@ -55,8 +55,21 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
+    if task_params[:priority] == "low"
+      new_params = task_params
+      new_params["priority"] = 1
+    elsif task_params[:priority] == "middle"
+      new_params = task_params
+      new_params["priority"] = 2
+    elsif task_params[:priority] == "high"
+      new_params = task_params
+      new_params["priority"] = 3
+    else
+      raise
+    end
+    byebug
     respond_to do |format|
-      if @task.update(task_params)
+      if @task.update(new_params)
         format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
