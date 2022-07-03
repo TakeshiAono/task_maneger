@@ -7,17 +7,22 @@
 
 <p>
   <strong>Priority:</strong>
-  <%= @task.priority %>
+  <span class = "show_value"><%= Task::priority_cord[@task.priority.to_i] %></span>
 </p>
 
 <p>
   <strong>Title:</strong>
-  <%= @task.title %>
+  <span class = "show_value"><%= @task.title%></span>
 </p>
 
 <p>
   <strong>Deadline:</strong>
-  <%= @task.deadline %>
+  <span class = "show_value"><%= @task.deadline%></span>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <span class = "show_value"><%= @task.status%></span>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

@@ -1,9 +1,15 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
-  # GET /tasks or /tasks.json
   def index
     @tasks = Task.all.order(created_at: "DESC")
+    @tasks = Task.all.order(priority: "DESC") if params[:sort_priority]
+    @tasks = Task.all.order(deadline: "DESC") if params[:sort_expired]
+    if params[:search]
+      @tasks = Task.where('title like ?',"%#{params[:search][:title_search]}%") if params[:search][:title_search].present?
+      @tasks = @tasks.where('status like ?',"#{params[:search][:status_search]}") if params[:search][:status_search].present?
+    end
+    @tasks = @tasks.page(params[:page]).per(5)
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -13,6 +19,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    # @task.status.build
   end
 
   # GET /tasks/1/edit
@@ -21,7 +28,19 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    if task_params[:priority] == "low"
+      new_params = task_params
+      new_params["priority"] = 1
+    elsif task_params[:priority] == "middle"
+      new_params = task_params
+      new_params["priority"] = 2
+    elsif task_params[:priority] == "high"
+      new_params = task_params
+      new_params["priority"] = 3
+    else
+      raise
+    end
+    @task = Task.new(new_params)
 
     respond_to do |format|
       if @task.save
@@ -36,8 +55,21 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
+    if task_params[:priority] == "low"
+      new_params = task_params
+      new_params["priority"] = 1
+    elsif task_params[:priority] == "middle"
+      new_params = task_params
+      new_params["priority"] = 2
+    elsif task_params[:priority] == "high"
+      new_params = task_params
+      new_params["priority"] = 3
+    else
+      raise
+    end
+    byebug
     respond_to do |format|
-      if @task.update(task_params)
+      if @task.update(new_params)
         format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
@@ -65,6 +97,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:user_id, :priority, :title, :deadline)
+      params.require(:task).permit(:user_id, :priority, :title, :deadline, :status)
     end
 end

@@ -12,6 +12,8 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
+gem 'kaminari'
+gem 'rails-i18n'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -41,7 +43,6 @@ group :test do
 
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
-  gem 'factory_bot_rails'
   gem 'faker'
 end
 

@@ -30,4 +30,17 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  csv:
+    header:
+      task:
+        done: done
+        not_yet: note_yet
+        started: started
+        high: high
+  New Task: New Task
+  search:
+  Priority:
+  Deadline:
+  title: title
+  Status: Status
+  created_at: created_at
