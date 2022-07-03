@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :user do
     name {'aono'}
+    email {'aono0321@yahoo.co.jp'}
+    password {'aaa'}
     id {1}
   end
 
@@ -9,6 +11,7 @@ FactoryBot.define do
     priority {1}
     deadline {Date.today}
     created_at {Date.today}
+    user_id {1}
   end
 
   factory :second_task, class: Task do
@@ -16,6 +19,7 @@ FactoryBot.define do
     priority {2}
     deadline {Date.today}
     created_at {Date.today}
+    user_id {1}
   end
 
   factory :status do

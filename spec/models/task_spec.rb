@@ -1,5 +1,6 @@
 require 'rails_helper'
 describe 'タスクモデル機能', type: :model do
+  let!(:user){FactoryBot.create(:user)}
   describe '検索機能' do
     let!(:task){FactoryBot.create(:task, title: "test", status: "done")}
     let!(:second_task){FactoryBot.create(:second_task, title: 'sample', status: "not_yet")}
@@ -46,12 +47,10 @@ describe 'タスクモデル機能', type: :model do
     context 'タスクのタイトルと詳細に内容が記載されている場合' do
       it 'バリデーションが通る' do
         # task = User.create(name: "test", tasks_attributes: [{title: "test", priority: 1, deadline: Date.today}])
-        task = Task.create(title: 'test', priority: 1, deadline: Date.today)
+        task = Task.create(title: 'test', priority: 1, deadline: Date.today, user_id: 1)
         # expect(task).to be_valid
         expect(task).to be_valid
 
-        task = FactoryBot.create(:task, deadline: '2022_07_03', status: '未着手' )
-               FactoryBot.create(:task, title: "test", status: "done")
       end
     end
   end
