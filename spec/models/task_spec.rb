@@ -49,6 +49,9 @@ describe 'タスクモデル機能', type: :model do
         task = Task.create(title: 'test', priority: 1, deadline: Date.today)
         # expect(task).to be_valid
         expect(task).to be_valid
+
+        task = FactoryBot.create(:task, deadline: '2022_07_03', status: '未着手' )
+               FactoryBot.create(:task, title: "test", status: "done")
       end
     end
   end
