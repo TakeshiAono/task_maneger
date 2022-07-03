@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   # PRIORITY_CONST = {"1" => "low", "2" => "middle", "3" => "high"}
-  PRIORITY_CONST = {1 => "low", 2 => "middle", 3 => "hige" }
+  PRIORITY_CONST = {1 => "low", 2 => "middle", 3 => "high" }
   PRIORITY_WORD = ["low" , "middle", "high"]
   # STATUS_WORD = [nil, 'done','not_yet','started']
   validates :title, presence: true
