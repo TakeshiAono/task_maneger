@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
+    byebug
     @tasks = Task.all.order(created_at: "DESC")
     @tasks = Task.all.order(priority: "DESC") if params[:sort_priority]
     @tasks = Task.all.order(deadline: "DESC") if params[:sort_expired]
