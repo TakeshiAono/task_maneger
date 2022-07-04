@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: user_params[:email])
     if @user.authenticate(user_params[:password])
       session[:user_id] = @user.id
-      redirect_to tasks_path
+      redirect_to user_path(@user.id)
     else
       render :login
     end
