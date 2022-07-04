@@ -67,7 +67,6 @@ class TasksController < ApplicationController
     else
       raise
     end
-    byebug
     respond_to do |format|
       if @task.update(new_params)
         format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
