@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
+<h1><%=@user[:name] %> のTasks</h1>
 <div class = "form_content m-3 border d-inline-flex p-3">
   <%= form_with(url: tasks_path, method: :get, scope: 'search', local: true) do  |f| %>
     <div>
