@@ -42,7 +42,6 @@ class TasksController < ApplicationController
       raise
     end
     @task = Task.new(new_params)
-
     respond_to do |format|
       if @task.save
         format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
