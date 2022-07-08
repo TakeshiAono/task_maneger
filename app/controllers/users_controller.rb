@@ -9,9 +9,10 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    redirect_to tasks_path unless params[:id] == current_user.id.to_s
     @user = User.find(session[:user_id])
     @tasks = @user.tasks
-   end
+  end
 
   # GET /users/new
   def new
