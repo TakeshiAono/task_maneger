@@ -14,12 +14,16 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody>    
     <% @users.each do |user| %>
+      <% counter = 0 %>
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.tasks.count %></td>
+        <% user.tasks.each do |task| %>
+            <% counter += 1 %>
+        <% end %>
+        <td><%= counter %>
         <td><%= user.section %></td>
         <td><%= link_to 'Show', admin_user_path(user) %></td>
         <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
