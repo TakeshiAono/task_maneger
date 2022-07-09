@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :basic_auth unless Rails.env.test?
   protect_from_forgery with: :exception
   before_action :login_required
- 
+
+
+
   private
   def basic_auth
     authenticate_or_request_with_http_basic do |username, password|

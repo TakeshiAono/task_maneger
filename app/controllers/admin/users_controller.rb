@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :if_not_admin
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :admin?
 
   def index
     @users = User.all.includes(:tasks)
@@ -56,7 +57,11 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # private
+  private
+  def admin?
+    redirect_to tasks_path, notice: "管理者以外はアクセスできません" unless User.find(session[:user_id]).admin == true
+  end
+
   def set_user
     @user = User.find(params[:id])
   end
