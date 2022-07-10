@@ -11,7 +11,7 @@ class User < ApplicationRecord
     # begin
     # if User.where(admin: true).count >= 6
     # ActiveRecord::Rollback
-    # throw(:abort) if User.where(admin: true).count < 1
+    throw(:abort) if User.where(admin: true).count < 1
     # end
     # rescue
       # byebug
