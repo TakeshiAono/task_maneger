@@ -1,10 +1,17 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  describe '新規登録機能' do
-    context '一般ユーザーがsign upした場合' do
-      example '作成したユーザーが表示される' do
-      end
-    end
+  let!(:user){FactoryBot.create(:user)}
+  let!(:admin_user){FactoryBot.create(:admin_user)}
+  let!(:second_user){FactoryBot.create(:second_user)}
+  before do
+    # FactoryBot.create(:user)
+    # FactoryBot.create(:admin_user)
+    # FactoryBot.create(:second_user)
+    visit login_sessions_path
+    fill_in "user[email]", with: 'test@gmail.com'
+    fill_in "user[password]", with: 'testpassword'
+    click_on "commit"
+    visit tasks_path
   end
   describe '新規作成機能' do
     context 'タスクを新規新作成した場合' do
@@ -25,9 +32,9 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '一覧表示機能' do
     context '優先順位でソートした場合' do
       example '正しい検索結果が表示される' do
-        FactoryBot.create(:task, id: 1, title: "test", priority: 1)
-        FactoryBot.create(:task, id: 2, title: "test2", priority: 2)
-        FactoryBot.create(:task, id: 3, title: "test3", priority: 3)
+        FactoryBot.create(:task, id: 1, title: "test", priority: 1, user: user)
+        FactoryBot.create(:task, id: 2, title: "test2", priority: 2, user: user)
+        FactoryBot.create(:task, id: 3, title: "test3", priority: 3, user: user)
         visit tasks_path
         click_on 'Priority'
         task_list = all('.task_row')
@@ -38,10 +45,10 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'statusとtitleでand検索した場合' do
       example '正しい検索結果が表示される' do
-        FactoryBot.create(:task, id: 1, title: "test", status: "done")
-        FactoryBot.create(:task, id: 2, title: "I have a pen", status: "done")
-        FactoryBot.create(:task, id: 3, title: "test", status: "not_yet")
-        FactoryBot.create(:task, id: 4, title: "I have a pen", status:"not_yet")
+        FactoryBot.create(:task, id: 1, title: "test", status: "done", user: user)
+        FactoryBot.create(:task, id: 2, title: "I have a pen", status: "done", user: user)
+        FactoryBot.create(:task, id: 3, title: "test", status: "not_yet", user: user)
+        FactoryBot.create(:task, id: 4, title: "I have a pen", status:"not_yet", user: user)
         visit tasks_path
         fill_in "search[title_search]", with: "test"
         select "done", from: "search[status_search]"
@@ -54,8 +61,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'statusで完全一致検索した場合' do
       example '正しい検索結果が表示される' do
-        FactoryBot.create(:task, id: 1, title: "test", status: "done")
-        FactoryBot.create(:task, id: 2, title: "I have a pen", status:"not_yet")
+        FactoryBot.create(:task, id: 1, title: "test", status: "done", user: user)
+        FactoryBot.create(:task, id: 2, title: "I have a pen", status:"not_yet", user: user)
         visit tasks_path
         select "done", from: "search[status_search]"
         click_on 'search'
@@ -66,8 +73,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タイトルであいまい検索した場合' do
       example '正しい検索結果が表示される' do
-        FactoryBot.create(:task, id: 1, title: "test")
-        FactoryBot.create(:task, id: 2, title: "I have a pen")
+        FactoryBot.create(:task, id: 1, title: "test", user: user)
+        FactoryBot.create(:task, id: 2, title: "I have a pen", user: user)
         visit tasks_path
         fill_in "search[title_search]", with: "test"
         click_on 'search'
@@ -78,8 +85,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '終了期限でソートした場合' do
       example '終了期限で降順に一覧が表示される' do
-        FactoryBot.create(:task, id: 1, deadline: "2022-01-01")
-        FactoryBot.create(:task, id: 2, deadline: "2022-01-02")
+        FactoryBot.create(:task, id: 1, deadline: "2022-01-01", user: user)
+        FactoryBot.create(:task, id: 2, deadline: "2022-01-02", user: user)
         visit tasks_path
         click_on 'Deadline'
         task_list = all('.task_row')
@@ -91,7 +98,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
         # テストで使用するためのタスクを作成
-        FactoryBot.create(:task, title:"test_title", priority: 1, deadline: Date.today)
+        FactoryBot.create(:task, title:"test_title", priority: 1, deadline: Date.today, user: user)
         # タスク一覧ページに遷移
         visit tasks_path
         # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
@@ -102,8 +109,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
-        FactoryBot.create(:task, id: 1, created_at: Date.today-1)
-        FactoryBot.create(:task, id: 2, created_at: Date.today)
+        FactoryBot.create(:task, id: 1, created_at: Date.today-1, user: user)
+        FactoryBot.create(:task, id: 2, created_at: Date.today, user: user)
         visit tasks_path
         task_list = all('.task_row')
         expect(task_list[0]).to have_content Date.today
@@ -115,7 +122,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '任意のタスク詳細画面に遷移した場合' do
       it '該当タスクの内容が表示される' do
         # FactoryBot.create(:user, name:"test")
-        task = FactoryBot.create(:task, title:"test_title", priority: 1, deadline: Date.today)
+        task = FactoryBot.create(:task, title:"test_title", priority: 1, deadline: Date.today, user: user)
         visit task_path(task.id)
         expect(page).to have_content "test_title"
       end

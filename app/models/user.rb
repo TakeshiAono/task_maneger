@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  before_update :prevent_to_role_empty
-  before_destroy :prevent_to_role_empty
+  after_update :prevent_to_role_empty
+  after_destroy :prevent_to_role_empty
   has_many :tasks, dependent: :destroy
   validates :email, uniqueness: true
   # accepts_nested_attributes_for :tasks
@@ -11,7 +11,7 @@ class User < ApplicationRecord
     # begin
     # if User.where(admin: true).count >= 6
     # ActiveRecord::Rollback
-    throw(:abort) if User.where(admin: true).count <= 1
+    throw(:abort) if User.where(admin: true).count < 1
     # end
     # rescue
       # byebug

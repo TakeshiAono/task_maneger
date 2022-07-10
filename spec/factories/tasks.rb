@@ -21,6 +21,13 @@ FactoryBot.define do
     # id {3}
   end
 
+  factory :third_user, class: User do
+    name {'test_user'}
+    email {'test@gmail.com'}
+    password {'testpassword'}
+    id {1}
+  end
+
   factory :second_admin_user, class: User do
     name {'admin2'}
     email {'admin2@gmail.com'}

@@ -1,6 +1,6 @@
 require 'rails_helper'
 describe 'タスクモデル機能', type: :model do
-  let!(:user){FactoryBot.create(:user)}
+  let!(:user){FactoryBot.create(:third_user)}
   describe '検索機能' do
     let!(:task){FactoryBot.create(:task, title: "test", status: "done")}
     let!(:second_task){FactoryBot.create(:second_task, title: 'sample', status: "not_yet")}
