@@ -1,0 +1,43 @@
+<h1>Users管理画面</h1>
+
+<%= link_to 'New User', new_admin_user_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>TaskCount</th>
+      <th>Section</th>
+      <th>role</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <% counter = 0 %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <% user.tasks.each do |task| %>
+            <% counter += 1 %>
+        <% end %>
+        <td><%= counter %>
+        <td><%= user.section %></td>
+        <%= form_with(local: true, model: [:admin, user]) do |f| %>
+          <td>
+            <%= f.check_box :admin %>
+            <%= f.submit  %>
+          </td>
+        <% end %>
+        <td><%= link_to 'Show', admin_user_path(user), name:user.name%></td>
+        <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+        <td><%= link_to 'Destroy', admin_user_path(user), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

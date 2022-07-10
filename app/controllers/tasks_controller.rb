@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
+    @user = User.find(session[:user_id])
     @tasks = Task.all.order(created_at: "DESC")
     @tasks = Task.all.order(priority: "DESC") if params[:sort_priority]
     @tasks = Task.all.order(deadline: "DESC") if params[:sort_expired]
@@ -41,7 +42,6 @@ class TasksController < ApplicationController
       raise
     end
     @task = Task.new(new_params)
-
     respond_to do |format|
       if @task.save
         format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
@@ -67,7 +67,6 @@ class TasksController < ApplicationController
     else
       raise
     end
-    byebug
     respond_to do |format|
       if @task.update(new_params)
         format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }

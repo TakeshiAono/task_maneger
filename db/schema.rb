@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_30_064315) do
+ActiveRecord::Schema.define(version: 2022_07_09_030201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,11 @@ ActiveRecord::Schema.define(version: 2022_06_30_064315) do
     t.date "deadline", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "status"
+    t.string "status", default: "not_yet"
+    t.bigint "user_id", null: false
+    t.index ["id"], name: "index_tasks_on_id"
     t.index ["title"], name: "index_tasks_on_title"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,9 +59,13 @@ ActiveRecord::Schema.define(version: 2022_06_30_064315) do
     t.string "section"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["id"], name: "index_users_on_id"
   end
 
   add_foreign_key "groups", "labels"
   add_foreign_key "groups", "tasks"
   add_foreign_key "statuses", "tasks"
+  add_foreign_key "tasks", "users"
 end

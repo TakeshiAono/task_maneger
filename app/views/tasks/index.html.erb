@@ -1,6 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
 <div class = "form_content m-3 border d-inline-flex p-3">
   <%= form_with(url: tasks_path, method: :get, scope: 'search', local: true) do  |f| %>
     <div>
@@ -28,6 +27,7 @@
       <th scope="col"><%= link_to t("Deadline"), tasks_path(sort_expired: "true") %></th>
       <th scope="col"><%= t("Status") %> </th>
       <th scope="col"> <%= t("created_at") %></th>
+      <th scope="col"> <%= t("author") %></th>
       <th scope="col" colspan="3"></th>
     </tr>
   </thead>
@@ -41,6 +41,7 @@
         <td><%= task.deadline %></td>
         <td><%= task.status %></td>
         <td><%= task.created_at %></td>
+        <td><%= task.user.name %></td>
         <td><%= link_to 'Show', task, class: "btn btn-outline-info" %></td>
         <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-outline-warning" %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
