@@ -46,7 +46,6 @@ class Admin::UsersController < ApplicationController
           # format.json { render :show, status: :ok, location: @user }
           # format.html { redirect_to admin_users_path(@user)}
         else
-          byebug
 
           redirect_to admin_users_path, notice:"updateに失敗しました,adminユーザーをrails コンソールで2人以上登録してください"
 
