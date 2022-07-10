@@ -19,7 +19,7 @@ class TasksController < ApplicationController
       end
       # @tasks = @tasks.labels.where('name like ?',"#{params[:search][:label_search]}") if params[:search][:label_search].present?
     end
-    @tasks = @tasks.page(params[:page]).per(5)
+    @tasks = @tasks.page(params[:page]).per(10)
   end
 
   # GET /tasks/1 or /tasks/1.json
