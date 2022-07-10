@@ -7,8 +7,10 @@ class Task < ApplicationRecord
   validates :priority, presence: true, numericality: {less_than_or_equal_to: 3}
   validates :deadline, presence: true
   belongs_to :user
+  has_many :groups, dependent: :destroy
+  has_many :labels, through: :groups
+  # accepts_nested_attributes_for :labels
   # has_many :status
-  # accepts_nested_attributes_for :status
   # belongs_to :user
 
   def self.status_input_restriction

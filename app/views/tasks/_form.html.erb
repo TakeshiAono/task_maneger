@@ -34,9 +34,17 @@
     <%= form.label :deadline %>
     <%= form.date_select :deadline %>
   </div>
+
   <div class="field">
     <%= form.label :status %>
     <%= form.select :status, Task.status_input_restriction %>
+  </div>
+
+  <div class="field">
+    <% Label.all.each do |label| %>
+      <%= form.check_box :label_ids, {multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+      <label style="background-color: aquamarine"><%= label.name %></label>
+    <% end %>
   </div>
 
   <div class="actions">

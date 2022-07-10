@@ -25,5 +25,14 @@
   <span class = "show_value"><%= @task.status%></span>
 </p>
 
+<p>
+  <strong>Labels:</strong>
+  <span class = "show_value">
+    <% @task.labels.each do |label|%>
+      <%= label.name %>
+    <% end %>
+  </span>
+</p>
+
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

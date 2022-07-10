@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class = "form_content m-3 border d-inline-flex p-3">
-  <%= form_with(url: tasks_path, method: :get, scope: 'search', local: true) do  |f| %>
+  <%= form_with(url: tasks_path, method: :get, scope: 'search', local: true) do |f| %>
     <div>
       <%= f.label :title_search %>
       <%= f.text_field :title_search %>
@@ -10,6 +10,15 @@
     <div>
       <%= f.label :status_search %>
       <%= f.select :status_search, Task.status_input_restriction %>
+    </div>
+
+    <div>
+      <%= f.label :label_search %>
+      <%= f.select :label_search, Label.all.collect {|p| [p.name, p.id] }, include_blank: true %>
+
+      <%# <% list = [nil] %> %>
+      <%# <% Label.all.each do |label| list << label.name end %> %>
+      <%# <%= f.select :label_search, list %> %>
     </div>
     <div><%= f.submit t("search"), class:"bd-highlight" %></div>
   <% end %>
@@ -28,6 +37,7 @@
       <th scope="col"><%= t("Status") %> </th>
       <th scope="col"> <%= t("created_at") %></th>
       <th scope="col"> <%= t("author") %></th>
+      <th scope="col"> <%= t("labels") %></th>
       <th scope="col" colspan="3"></th>
     </tr>
   </thead>
@@ -42,6 +52,11 @@
         <td><%= task.status %></td>
         <td><%= task.created_at %></td>
         <td><%= task.user.name %></td>
+        <td>
+          <% task.labels.each do |label| %>
+            <%= label.name %>
+          <% end %>
+        </td>
         <td><%= link_to 'Show', task, class: "btn btn-outline-info" %></td>
         <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-outline-warning" %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
