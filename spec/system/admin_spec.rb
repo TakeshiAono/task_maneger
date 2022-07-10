@@ -42,6 +42,13 @@ RSpec.describe '管理画面機能', type: :system do
         click_on "commit"
         expect(page).to have_content "update_test_user"
       end
+      
+      example '管理ユーザーはユーザーを削除できる' do
+        click_link "Destroy", href:admin_user_path(User.find_by(email: 'test@gmail.com').id)
+        # page.accept_confirm "Are you sure?"
+        # expect(page).to have_content "Task was successfully destroyed."
+        expect(page).not_to have_content "test@gmail.com"
+      end
 
     end
 
