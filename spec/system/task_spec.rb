@@ -1,5 +1,11 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
+  describe '新規登録機能' do
+    context '一般ユーザーがsign upした場合' do
+      example '作成したユーザーが表示される' do
+      end
+    end
+  end
   describe '新規作成機能' do
     context 'タスクを新規新作成した場合' do
       example '作成したタスクが表示される' do
