@@ -26,7 +26,6 @@ RSpec.describe 'セッション機能', type: :system do
 
     context 'ログアウトした場合' do
       example '正常にログアウトできる' do
-        byebug
         click_link 'Logout'
         expect(current_path).to eq login_sessions_path 
       end

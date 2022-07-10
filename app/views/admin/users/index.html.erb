@@ -13,7 +13,7 @@
     </tr>
   </thead>
 
-  <tbody>    
+  <tbody>
     <% @users.each do |user| %>
       <% counter = 0 %>
       <tr>
@@ -30,7 +30,7 @@
             <%= f.submit  %>
           </td>
         <% end %>
-        <td><%= link_to 'Show', admin_user_path(user) %></td>
+        <td><%= link_to 'Show', admin_user_path(user), name:user.name%></td>
         <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
         <td><%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?'  } %></td>
       </tr>
