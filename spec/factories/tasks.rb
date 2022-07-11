@@ -55,4 +55,43 @@ FactoryBot.define do
   factory :status do
     name {'yet'}
   end
+
+  factory :label do
+    name {'label1'}
+    id {1}
+  end
+
+  factory :second_label, class: Label do 
+    name {'label2'}
+    id {2}
+  end
+
+  factory :group do
+    task_id {1}
+    label_id {1}
+  end
+
+  factory :second_group, class: Group do
+    task_id {2}
+    label_id {2}
+  end
+
+  factory :third_task, class: Task do
+    title {'test3'}
+    priority {2}
+    deadline {Date.today}
+    created_at {Date.today}
+    user_id {1}
+    id {1}
+  end
+
+  factory :task4, class: Task do
+    title {'test4'}
+    priority {2}
+    deadline {Date.today}
+    created_at {Date.today}
+    user_id {1}
+    id {2}
+  end
+
 end
