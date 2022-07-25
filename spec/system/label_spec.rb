@@ -1,14 +1,21 @@
 require 'rails_helper'
 RSpec.describe 'ラベル機能', type: :system do
   describe 'ラベル機能' do
+    let!(:user){FactoryBot.create(:user)}
+    let!(:task){FactoryBot.create(:task, user: user)}
+    let!(:task4){FactoryBot.create(:task4, user: user)}
+    let!(:label){FactoryBot.create(:label)}
+    let!(:group){FactoryBot.create(:group, task: task, label: label)}
+    let!(:group2){FactoryBot.create(:group, task: task4, label: label)}
+
     before do
-      FactoryBot.create(:third_user)
-      FactoryBot.create(:third_task)
-      FactoryBot.create(:task4)
-      FactoryBot.create(:label)
-      FactoryBot.create(:second_label)
-      FactoryBot.create(:group)
-      FactoryBot.create(:second_group)
+      # FactoryBot.create(:third_user)
+      # FactoryBot.create(:third_task)
+      # FactoryBot.create(:task4)
+      # FactoryBot.create(:label)
+      # FactoryBot.create(:second_label)
+      # FactoryBot.create(:group)
+      # FactoryBot.create(:second_group)
       visit login_sessions_path
       fill_in "user[email]", with: 'test@gmail.com'
       fill_in "user[password]", with: 'testpassword'

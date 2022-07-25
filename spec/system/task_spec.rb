@@ -4,9 +4,6 @@ RSpec.describe 'タスク管理機能', type: :system do
   let!(:admin_user){FactoryBot.create(:admin_user)}
   let!(:second_user){FactoryBot.create(:second_user)}
   before do
-    # FactoryBot.create(:user)
-    # FactoryBot.create(:admin_user)
-    # FactoryBot.create(:second_user)
     visit login_sessions_path
     fill_in "user[email]", with: 'test@gmail.com'
     fill_in "user[password]", with: 'testpassword'
@@ -33,6 +30,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '優先順位でソートした場合' do
       example '正しい検索結果が表示される' do
         FactoryBot.create(:task, id: 1, title: "test", priority: 1, user: user)
+        byebug
         FactoryBot.create(:task, id: 2, title: "test2", priority: 2, user: user)
         FactoryBot.create(:task, id: 3, title: "test3", priority: 3, user: user)
         visit tasks_path
@@ -90,21 +88,15 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         click_on 'Deadline'
         task_list = all('.task_row')
-        # expect(task_list[0].title).to be >= task_list[1].text
         expect(task_list[0]).to have_content '2022-01-02'
         expect(task_list[1]).to have_content '2022-01-01'
       end
     end
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
-        # テストで使用するためのタスクを作成
         FactoryBot.create(:task, title:"test_title", priority: 1, deadline: Date.today, user: user)
-        # タスク一覧ページに遷移
         visit tasks_path
-        # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
-        # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
         expect(page).to have_content 'test_title'
-        # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
     end
     context 'タスクが作成日時の降順に並んでいる場合' do
@@ -121,7 +113,6 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '詳細表示機能' do
     context '任意のタスク詳細画面に遷移した場合' do
       it '該当タスクの内容が表示される' do
-        # FactoryBot.create(:user, name:"test")
         task = FactoryBot.create(:task, title:"test_title", priority: 1, deadline: Date.today, user: user)
         visit task_path(task.id)
         expect(page).to have_content "test_title"

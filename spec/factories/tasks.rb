@@ -3,14 +3,12 @@ FactoryBot.define do
     name {'test_user'}
     email {'test@gmail.com'}
     password {'testpassword'}
-    # id {1}
   end
 
   factory :admin_user, class: User do
     name {'admin'}
     email {'admin@gmail.com'}
     password {'adminpassword'}
-    # id {2}
     admin {true}
   end
 
@@ -18,7 +16,6 @@ FactoryBot.define do
     name {'test_user2'}
     email {'test2@gmail.com'}
     password {'testpassword2'}
-    # id {3}
   end
 
   factory :third_user, class: User do
@@ -32,7 +29,6 @@ FactoryBot.define do
     name {'admin2'}
     email {'admin2@gmail.com'}
     password {'admin2password'}
-    # id {4}
     admin {true}
   end
 
@@ -67,8 +63,8 @@ FactoryBot.define do
   end
 
   factory :group do
-    task_id {1}
-    label_id {1}
+    # task_id {1}
+    # label_id {1}
   end
 
   factory :second_group, class: Group do
@@ -90,8 +86,8 @@ FactoryBot.define do
     priority {2}
     deadline {Date.today}
     created_at {Date.today}
-    user_id {1}
-    id {2}
+    # user_id {1}
+    # id {2}
   end
 
 end
